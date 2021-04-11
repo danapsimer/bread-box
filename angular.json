@@ -145,6 +145,56 @@
           }
         }
       }
+    },
+    "recipe-data": {
+      "projectType": "library",
+      "root": "libs/recipe/data",
+      "sourceRoot": "libs/recipe/data/src",
+      "prefix": "bread-box",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/recipe/data/src/**/*.ts",
+              "libs/recipe/data/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/recipe/data"],
+          "options": {
+            "jestConfig": "libs/recipe/data/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "recipe-editor": {
+      "projectType": "library",
+      "root": "libs/recipe/editor",
+      "sourceRoot": "libs/recipe/editor/src",
+      "prefix": "bread-box",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/recipe/editor/src/**/*.ts",
+              "libs/recipe/editor/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/recipe/editor"],
+          "options": {
+            "jestConfig": "libs/recipe/editor/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   }
 }

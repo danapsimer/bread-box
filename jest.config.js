@@ -1,3 +1,7 @@
 module.exports = {
-  projects: ['<rootDir>/apps/bread-box'],
+  projects: [
+    '<rootDir>/apps/bread-box',
+    '<rootDir>/libs/recipe/data',
+    '<rootDir>/libs/recipe/editor',
+  ],
 };

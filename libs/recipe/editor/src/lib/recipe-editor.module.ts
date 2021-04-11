@@ -7,5 +7,8 @@ import { RecipeEditorComponent } from './recipe-editor/recipe-editor.component';
   declarations: [
     RecipeEditorComponent
   ],
+  exports: [
+    RecipeEditorComponent
+  ]
 })
 export class RecipeEditorModule {}

@@ -1,0 +1,150 @@
+{
+  "version": 1,
+  "cli": {
+    "defaultCollection": "@nrwl/angular"
+  },
+  "defaultProject": "bread-box",
+  "schematics": {
+    "@nrwl/angular": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
+        "linter": "eslint"
+      },
+      "storybook-configuration": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/angular:application": {
+      "style": "css",
+      "linter": "eslint",
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "style": "css",
+      "linter": "eslint",
+      "unitTestRunner": "jest"
+    },
+    "@nrwl/angular:component": {
+      "style": "css"
+    }
+  },
+  "projects": {
+    "bread-box": {
+      "projectType": "application",
+      "root": "apps/bread-box",
+      "sourceRoot": "apps/bread-box/src",
+      "prefix": "bread-box",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/bread-box",
+            "index": "apps/bread-box/src/index.html",
+            "main": "apps/bread-box/src/main.ts",
+            "polyfills": "apps/bread-box/src/polyfills.ts",
+            "tsConfig": "apps/bread-box/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "apps/bread-box/src/favicon.ico",
+              "apps/bread-box/src/assets"
+            ],
+            "styles": ["apps/bread-box/src/styles.css"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/bread-box/src/environments/environment.ts",
+                  "with": "apps/bread-box/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "bread-box:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "bread-box:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "bread-box:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/bread-box/src/**/*.ts",
+              "apps/bread-box/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/bread-box"],
+          "options": {
+            "jestConfig": "apps/bread-box/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "bread-box-e2e": {
+      "root": "apps/bread-box-e2e",
+      "sourceRoot": "apps/bread-box-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/bread-box-e2e/cypress.json",
+            "tsConfig": "apps/bread-box-e2e/tsconfig.e2e.json",
+            "devServerTarget": "bread-box:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "bread-box:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/bread-box-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    }
+  }
+}

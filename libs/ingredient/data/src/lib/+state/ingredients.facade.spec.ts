@@ -17,7 +17,7 @@ import {
   INGREDIENTS_FEATURE_KEY,
   State,
   initialState,
-  reducer,
+  reducer
 } from './ingredients.reducer';
 
 interface TestSchema {
@@ -30,31 +30,35 @@ describe('IngredientsFacade', () => {
   const createIngredientsEntity = (id: string, name = '') =>
     ({
       id,
-      name: name || `name-${id}`,
+      name: name || `name-${id}`
     } as IngredientEntity);
 
-  beforeEach(() => {});
+  beforeEach(() => {
+  });
 
   describe('used in NgModule', () => {
     beforeEach(() => {
       @NgModule({
         imports: [
           StoreModule.forFeature(INGREDIENTS_FEATURE_KEY, reducer),
-          EffectsModule.forFeature([IngredientsEffects]),
+          EffectsModule.forFeature([IngredientsEffects])
         ],
-        providers: [IngredientsFacade],
+        providers: [IngredientsFacade]
       })
-      class CustomFeatureModule {}
+      class CustomFeatureModule {
+      }
 
       @NgModule({
         imports: [
           NxModule.forRoot(),
           StoreModule.forRoot({}),
           EffectsModule.forRoot([]),
-          CustomFeatureModule,
-        ],
+          CustomFeatureModule
+        ]
       })
-      class RootModule {}
+      class RootModule {
+      }
+
       TestBed.configureTestingModule({ imports: [RootModule] });
 
       store = TestBed.inject(Store);
@@ -101,8 +105,8 @@ describe('IngredientsFacade', () => {
           IngredientsActions.loadIngredientsSuccess({
             ingredients: [
               createIngredientsEntity('AAA'),
-              createIngredientsEntity('BBB'),
-            ],
+              createIngredientsEntity('BBB')
+            ]
           })
         );
 
@@ -115,6 +119,21 @@ describe('IngredientsFacade', () => {
         done();
       } catch (err) {
         done.fail(err);
+      }
+    });
+
+    it('ingredientsById$ should return the specified ingredient', async (done) => {
+      try {
+        facade.init();
+        let ingredient = await readFirst(facade.ingredientById$('1'));
+        expect(ingredient).toStrictEqual({ id: "1", name: "Bread Flour", isGrain: true } as IngredientEntity);
+
+        ingredient = await readFirst(facade.ingredientById$('2'));
+        expect(ingredient).toStrictEqual({ id: "2", name: "Water", isGrain: false } as IngredientEntity);
+
+        done();
+      } catch (err) {
+        done(err);
       }
     });
   });

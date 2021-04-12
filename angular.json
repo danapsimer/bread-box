@@ -195,6 +195,31 @@
           }
         }
       }
+    },
+    "ingredient-data": {
+      "projectType": "library",
+      "root": "libs/ingredient/data",
+      "sourceRoot": "libs/ingredient/data/src",
+      "prefix": "bread-box",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/ingredient/data/src/**/*.ts",
+              "libs/ingredient/data/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/ingredient/data"],
+          "options": {
+            "jestConfig": "libs/ingredient/data/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   }
 }

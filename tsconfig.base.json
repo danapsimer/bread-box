@@ -16,7 +16,8 @@
     "baseUrl": ".",
     "paths": {
       "@bread-box/recipe/data": ["libs/recipe/data/src/index.ts"],
-      "@bread-box/recipe/editor": ["libs/recipe/editor/src/index.ts"]
+      "@bread-box/recipe/editor": ["libs/recipe/editor/src/index.ts"],
+      "@bread-box/ingredient/data": ["libs/ingredient/data/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

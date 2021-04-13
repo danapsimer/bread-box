@@ -10,5 +10,5 @@ export interface RecipeIngredient {
 export interface RecipesEntity {
   id: string; // Primary ID
   name: string;
-
+  ingredients: RecipeIngredient[]
 }

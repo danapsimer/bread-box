@@ -17,7 +17,7 @@ export class IngredientsEffects {
         run: (action) => {
           return this.ingredientsService.getAll$().pipe(
             toArray(),
-            map((ingredients) => IngredientsActions.loadIngredientsSuccess({ ingredients: ingredients }))
+            map((ingredients) => IngredientsActions.loadIngredientsSuccess({ ingredients }))
           );
         },
         onError: (action, error) => {

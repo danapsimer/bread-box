@@ -77,7 +77,7 @@ describe('RecipesFacade', () => {
         list = await readFirst(facade.allRecipes$);
         isLoaded = await readFirst(facade.loaded$);
 
-        expect(list.length).toBe(0);
+        expect(list.length).toBe(1);
         expect(isLoaded).toBe(true);
 
         done();

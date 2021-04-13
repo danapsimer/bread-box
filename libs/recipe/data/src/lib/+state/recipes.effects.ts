@@ -4,6 +4,8 @@ import { fetch } from '@nrwl/angular';
 
 import * as RecipesFeature from './recipes.reducer';
 import * as RecipesActions from './recipes.actions';
+import { RecipesService } from '../recipes.service';
+import { map, toArray } from 'rxjs/operators';
 
 @Injectable()
 export class RecipesEffects {
@@ -12,17 +14,19 @@ export class RecipesEffects {
       ofType(RecipesActions.init),
       fetch({
         run: (action) => {
-          // Your custom service 'load' logic goes here. For now just return a success action...
-          return RecipesActions.loadRecipesSuccess({ recipes: [] });
+          return this.recipeService.getAll$().pipe(
+            toArray(),
+            map(recipes => RecipesActions.loadRecipesSuccess({ recipes }))
+          );
         },
-
         onError: (action, error) => {
           console.error('Error', error);
           return RecipesActions.loadRecipesFailure({ error });
-        },
+        }
       })
     )
   );
 
-  constructor(private actions$: Actions) {}
+  constructor(private actions$: Actions, private recipeService: RecipesService) {
+  }
 }

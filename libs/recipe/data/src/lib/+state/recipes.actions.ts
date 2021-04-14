@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { RecipesEntity, RecipeIngredient } from './recipes.models';
+import { EditableRecipe, Recipe, RecipeIngredient } from './recipes.models';
 
 export const init = createAction('[Recipes Page] Init');
 
@@ -10,7 +10,7 @@ export const loadOrSelectRecipe = createAction('[Recipes Page] Load Recipe',
 
 export const loadRecipesSuccess = createAction(
   '[Recipes/API] Load Recipes Success',
-  props<{ recipes: RecipesEntity[] }>()
+  props<{ recipes: Recipe[] }>()
 );
 
 export const loadRecipesFailure = createAction(
@@ -24,7 +24,7 @@ export const createNewRecipe = createAction(
 
 export const updateRecipe = createAction(
   '[Recipes/API] Update Recipe',
-  props<{ id: string, updated: Omit<RecipesEntity, 'id' | 'ingredients'> }>()
+  props<{ id: string, updated: EditableRecipe }>()
 );
 
 export const addRecipeIngredient = createAction(

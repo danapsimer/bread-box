@@ -7,7 +7,7 @@ import { StoreModule, Store } from '@ngrx/store';
 
 import { NxModule } from '@nrwl/angular';
 
-import { RecipesEntity } from './recipes.models';
+import { Recipe } from './recipes.models';
 import { RecipesEffects } from './recipes.effects';
 import { RecipesFacade } from './recipes.facade';
 
@@ -17,7 +17,7 @@ import {
   RECIPES_FEATURE_KEY,
   State,
   initialState,
-  reducer,
+  reducer
 } from './recipes.reducer';
 
 interface TestSchema {
@@ -30,31 +30,35 @@ describe('RecipesFacade', () => {
   const createRecipesEntity = (id: string, name = '') =>
     ({
       id,
-      name: name || `name-${id}`,
-    } as RecipesEntity);
+      name: name || `name-${id}`
+    } as Recipe);
 
-  beforeEach(() => {});
+  beforeEach(() => {
+  });
 
   describe('used in NgModule', () => {
     beforeEach(() => {
       @NgModule({
         imports: [
           StoreModule.forFeature(RECIPES_FEATURE_KEY, reducer),
-          EffectsModule.forFeature([RecipesEffects]),
+          EffectsModule.forFeature([RecipesEffects])
         ],
-        providers: [RecipesFacade],
+        providers: [RecipesFacade]
       })
-      class CustomFeatureModule {}
+      class CustomFeatureModule {
+      }
 
       @NgModule({
         imports: [
           NxModule.forRoot(),
           StoreModule.forRoot({}),
           EffectsModule.forRoot([]),
-          CustomFeatureModule,
-        ],
+          CustomFeatureModule
+        ]
       })
-      class RootModule {}
+      class RootModule {
+      }
+
       TestBed.configureTestingModule({ imports: [RootModule] });
 
       store = TestBed.inject(Store);
@@ -64,7 +68,7 @@ describe('RecipesFacade', () => {
     /**
      * The initially generated facade::loadAll() returns empty array
      */
-    it('loadAll() should return empty list with loaded == true', async (done) => {
+    it('init() should return empty list with loaded == true', async (done) => {
       try {
         let list = await readFirst(facade.allRecipes$);
         let isLoaded = await readFirst(facade.loaded$);
@@ -86,6 +90,47 @@ describe('RecipesFacade', () => {
       }
     });
 
+    it('createNewRecipe should create a new recipe with a null name and empty ingredients', async (done) => {
+      try {
+        let list = await readFirst(facade.allRecipes$);
+        expect(list.length).toBe(0);
+
+        facade.createNewRecipe();
+
+        list = await readFirst(facade.allRecipes$);
+
+        expect(list.length).toBe(1);
+        expect(list[0]).toStrictEqual({ id: list[0].id, ingredients: [], name: null });
+
+        done();
+      } catch (err) {
+        done.fail(err);
+      }
+    });
+
+    it('updateRecipe should update a recipe with a name', async (done) => {
+      try {
+        let list = await readFirst(facade.allRecipes$);
+        expect(list.length).toBe(0);
+
+        facade.createNewRecipe();
+
+        list = await readFirst(facade.allRecipes$);
+
+        expect(list.length).toBe(1);
+
+        facade.updateRecipe(list[0].id, { name: 'White Bread' });
+
+        list = await readFirst(facade.allRecipes$);
+
+        expect(list.length).toBe(1);
+        expect(list[0]).toStrictEqual({ id: list[0].id, ingredients: [], name: 'White Bread' });
+
+        done();
+      } catch (err) {
+        done.fail(err);
+      }
+    });
     /**
      * Use `loadRecipesSuccess` to manually update list
      */
@@ -99,7 +144,7 @@ describe('RecipesFacade', () => {
 
         store.dispatch(
           RecipesActions.loadRecipesSuccess({
-            recipes: [createRecipesEntity('AAA'), createRecipesEntity('BBB')],
+            recipes: [createRecipesEntity('AAA'), createRecipesEntity('BBB')]
           })
         );
 

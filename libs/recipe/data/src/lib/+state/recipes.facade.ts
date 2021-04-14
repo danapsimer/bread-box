@@ -5,6 +5,7 @@ import { select, Store, Action } from '@ngrx/store';
 import * as RecipesActions from './recipes.actions';
 import * as RecipesFeature from './recipes.reducer';
 import * as RecipesSelectors from './recipes.selectors';
+import { EditableRecipe, Recipe } from './recipes.models';
 
 @Injectable()
 export class RecipesFacade {
@@ -16,7 +17,8 @@ export class RecipesFacade {
   allRecipes$ = this.store.pipe(select(RecipesSelectors.getAllRecipes));
   selectedRecipes$ = this.store.pipe(select(RecipesSelectors.getSelected));
 
-  constructor(private store: Store) {}
+  constructor(private store: Store) {
+  }
 
   /**
    * Use the initialization action to perform one
@@ -24,5 +26,21 @@ export class RecipesFacade {
    */
   init() {
     this.store.dispatch(RecipesActions.init());
+  }
+
+  /**
+   * Create a new recipe and make it the selected recipe
+   */
+  createNewRecipe() {
+    this.store.dispatch(RecipesActions.createNewRecipe());
+  }
+
+  /**
+   * Update the given recipe.
+   * @param id the id of the recipe to update.
+   * @param updated the updated fields.
+   */
+  updateRecipe(id: string, updated: EditableRecipe) {
+    this.store.dispatch(RecipesActions.updateRecipe({ id, updated }));
   }
 }

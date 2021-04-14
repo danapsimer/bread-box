@@ -1,4 +1,4 @@
-import { RecipeIngredient, RecipesEntity } from './recipes.models';
+import { RecipeIngredient, Recipe } from './recipes.models';
 import * as RecipesActions from './recipes.actions';
 import { State, initialState, reducer } from './recipes.reducer';
 import { createNewRecipe } from './recipes.actions';
@@ -8,7 +8,7 @@ describe('Recipes Reducer', () => {
     ({
       id,
       name: name || `name-${id}`
-    } as RecipesEntity);
+    } as Recipe);
 
   beforeEach(() => {
   });

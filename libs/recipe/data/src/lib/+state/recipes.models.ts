@@ -7,8 +7,10 @@ export interface RecipeIngredient {
 /**
  * Interface for the 'Recipes' data
  */
-export interface RecipesEntity {
+export interface Recipe {
   id: string; // Primary ID
   name: string;
   ingredients: RecipeIngredient[]
 }
+
+export type EditableRecipe = Omit<Recipe, "id" | "ingredients">;

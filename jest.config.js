@@ -4,5 +4,6 @@ module.exports = {
     '<rootDir>/libs/recipe/data',
     '<rootDir>/libs/recipe/editor',
     '<rootDir>/libs/ingredient/data',
+    '<rootDir>/libs/unit/data',
   ],
 };

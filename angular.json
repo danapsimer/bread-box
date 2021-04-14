@@ -220,6 +220,31 @@
           }
         }
       }
+    },
+    "unit-data": {
+      "projectType": "library",
+      "root": "libs/unit/data",
+      "sourceRoot": "libs/unit/data/src",
+      "prefix": "bread-box",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/unit/data/src/**/*.ts",
+              "libs/unit/data/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/unit/data"],
+          "options": {
+            "jestConfig": "libs/unit/data/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   }
 }

@@ -19,16 +19,18 @@ import { RecipeEditorModule } from '@bread-box/recipe/editor';
         metaReducers: !environment.production ? [] : [],
         runtimeChecks: {
           strictActionImmutability: true,
-          strictStateImmutability: true,
-        },
+          strictStateImmutability: true
+        }
       }
     ),
     EffectsModule.forRoot([]),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     RecipeEditorModule,
     AppRoutingModule,
+    RecipeEditorModule
   ],
   providers: [],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule {
+}

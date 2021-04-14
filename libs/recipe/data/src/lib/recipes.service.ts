@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { RecipesEntity } from '@bread-box/recipe/data';
+import { Recipe } from '@bread-box/recipe/data';
 import { from, Observable } from 'rxjs';
 
 @Injectable({
@@ -10,7 +10,7 @@ export class RecipesService {
   constructor() {
   }
 
-  dummyRecipes: RecipesEntity[] = [
+  dummyRecipes: Recipe[] = [
     {
       id: '1',
       name: 'White Bread',
@@ -25,7 +25,7 @@ export class RecipesService {
     }
   ];
 
-  getAll$(): Observable<RecipesEntity> {
+  getAll$(): Observable<Recipe> {
     return from(this.dummyRecipes)
   }
 }

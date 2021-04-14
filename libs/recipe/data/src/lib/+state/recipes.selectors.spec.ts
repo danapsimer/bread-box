@@ -1,4 +1,4 @@
-import { RecipesEntity } from './recipes.models';
+import { Recipe } from './recipes.models';
 import { State, recipesAdapter, initialState } from './recipes.reducer';
 import * as RecipesSelectors from './recipes.selectors';
 
@@ -9,7 +9,7 @@ describe('Recipes Selectors', () => {
     ({
       id,
       name: name || `name-${id}`,
-    } as RecipesEntity);
+    } as Recipe);
 
   let state;
 

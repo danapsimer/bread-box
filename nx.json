@@ -16,6 +16,7 @@
     "bread-box-e2e": { "tags": [], "implicitDependencies": ["bread-box"] },
     "recipe-data": { "tags": [] },
     "recipe-editor": { "tags": [] },
-    "ingredient-data": { "tags": [] }
+    "ingredient-data": { "tags": [] },
+    "unit-data": { "tags": [] }
   }
 }

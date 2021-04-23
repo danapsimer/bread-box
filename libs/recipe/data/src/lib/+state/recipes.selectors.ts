@@ -3,14 +3,16 @@ import {
   RECIPES_FEATURE_KEY,
   State,
   RecipesPartialState,
-  recipesAdapter,
+  recipesAdapter
 } from './recipes.reducer';
+import { from } from 'rxjs';
+import { count } from 'rxjs/operators';
+import { Recipe } from '@bread-box/recipe/data';
+import { Dictionary } from '@ngrx/entity';
 
 // Lookup the 'Recipes' feature state managed by NgRx
-export const getRecipesState = createFeatureSelector<
-  RecipesPartialState,
-  State
->(RECIPES_FEATURE_KEY);
+export const getRecipesState = createFeatureSelector<RecipesPartialState,
+  State>(RECIPES_FEATURE_KEY);
 
 const { selectAll, selectEntities } = recipesAdapter.getSelectors();
 
@@ -42,4 +44,14 @@ export const getSelected = createSelector(
   getRecipesEntities,
   getSelectedId,
   (entities, selectedId) => selectedId && entities[selectedId]
+);
+
+export const getById = createSelector(
+  getRecipesEntities,
+  (entities, props) => entities[props.id]
+);
+
+export const getLoadedIds = createSelector(
+  getRecipesState,
+  (state: State) => state.ids
 );

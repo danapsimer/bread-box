@@ -17,6 +17,7 @@ export class RecipesFacade {
   allRecipes$ = this.store.pipe(select(RecipesSelectors.getAllRecipes));
   selectedRecipes$ = this.store.pipe(select(RecipesSelectors.getSelected));
 
+
   constructor(private store: Store) {
   }
 
@@ -26,6 +27,15 @@ export class RecipesFacade {
    */
   init() {
     this.store.dispatch(RecipesActions.init());
+  }
+
+  /**
+   * Make the given recipe id the current recipe.
+   *
+   * @param recipeId the recipe id to get.
+   */
+  selectRecipe(recipeId: string) {
+    this.store.dispatch(RecipesActions.loadOrSelectRecipe({ recipeId }));
   }
 
   /**

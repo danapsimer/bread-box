@@ -1,0 +1,11 @@
+.ingredient-toolbar-spacer {
+  flex: 1 1 auto;
+}
+
+.internalMatGrid {
+  min-width: 100%;
+}
+
+.gridControlWidth {
+  width: 100%;
+}

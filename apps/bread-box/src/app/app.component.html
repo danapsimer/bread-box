@@ -1,5 +1,13 @@
-<header class="flex">
-  <h1>Welcome to {{ title }}!</h1>
+<header class='flex'>
+  <mat-toolbar>
+    <button mat-icon-button [matMenuTriggerFor]='main'>
+      <mat-icon>menu</mat-icon>
+    </button>
+    <h1>{{ title }}</h1>
+  </mat-toolbar>
+  <mat-menu #main='matMenu'>
+    <button mat-menu-item routerLink='recipe'>New</button>
+  </mat-menu>
 </header>
 <main>
   <router-outlet></router-outlet>

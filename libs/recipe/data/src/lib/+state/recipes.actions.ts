@@ -18,6 +18,16 @@ export const loadRecipesFailure = createAction(
   props<{ error: any }>()
 );
 
+export const addRecipe = createAction(
+  '[Recipes/API] Add Recipe',
+  props<{recipe:Recipe}>()
+);
+
+export const selectRecipe = createAction(
+  '[Recipes/API] Select Recipe',
+  props<{id:string}>()
+);
+
 export const createNewRecipe = createAction(
   '[Recipes/API] Create New Recipe'
 );

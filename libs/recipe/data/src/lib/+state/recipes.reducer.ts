@@ -46,6 +46,8 @@ const recipesReducer = createReducer(
     ...state,
     error
   })),
+  on(RecipesActions.addRecipe, (state, { recipe }) => recipesAdapter.addOne(recipe, state)),
+  on(RecipesActions.selectRecipe, (state, { id }) => ({ ...state, selectedId: id })),
   on(RecipesActions.createNewRecipe, (state) => {
     const selectedId = uuidv4();
     return recipesAdapter.addOne({ id: selectedId, name: null, ingredients: [] }, { ...state, selectedId });

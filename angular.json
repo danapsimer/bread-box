@@ -51,7 +51,7 @@
               "apps/bread-box/src/favicon.ico",
               "apps/bread-box/src/assets"
             ],
-            "styles": ["apps/bread-box/src/styles.css"],
+            "styles": ["./node_modules/@angular/material/prebuilt-themes/indigo-pink.css", "apps/bread-box/src/styles.css"],
             "scripts": []
           },
           "configurations": {

@@ -21,4 +21,10 @@ describe('RecipesService', () => {
       expect(value.length).toBe(1);
     });
   })
+
+  it('should return dummy data from getAll', () => {
+    return service.getAll$().pipe(toArray()).toPromise().then(value => {
+      expect(value.length).toBe(1);
+    });
+  })
 });
